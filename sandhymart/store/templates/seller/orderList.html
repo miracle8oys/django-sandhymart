@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+	
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Date Ordered</th>
+        <th scope="col">Transaction ID</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ order.customer }}</td>
+        <td>{{ order.date_ordered }}</td>
+        <td>{{ order.transaction_id }}</td>
+        <td>Rp.{{ order.get_cart_total|intcomma }}</td>
+        <td>
+        <a href="{% url 'detailOrder' order.id %}" class="btn btn-outline-primary">Detail</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<a class="btn btn-success my-3" href="{% url 'addProduct' %}">Add Product</a>
+<table class="table table-striped table-bordered position-absolute">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Digital</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ product.name }}</td>
+        <td>Rp.{{ product.price|intcomma }}</td>
+        <td>{{ product.digital }}</td>
+        <td class="row-image"><img class="row-image" src="{{ product.image.url }}"></td>
+        <td>
+            <a class="btn btn-primary mx-2" href="{% url 'updateProduct' product.id %}">Update</a>
+            <form action="{% url 'productDelete' %}" method="POST" class="d-inline">
+                {% csrf_token %}
+                <input type="hidden" name="id_product" value="{{ product.id }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

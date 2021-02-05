@@ -1,0 +1,11 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+	
+	<form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit">Add to Catalog</button>
+    </form>
+
+{% endblock content %}
