@@ -5,4 +5,4 @@ from rest_framework import serializers
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['get_cart_total', 'get_cart_items']
+        fields = ['get_cart_items']

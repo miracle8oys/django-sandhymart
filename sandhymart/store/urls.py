@@ -1,18 +1,13 @@
 from django.urls import path, include
 from . import views
 
-from .viewset_api import *
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register('order', OrderViewset)
-
 urlpatterns = [
-    path('restapi/', include(router.urls)),
 
     path('', views.store, name='store'),
     path('search/', views.searching, name='searching'),
     path('checkout/', views.checkout, name='checkout'),
+
+    path('get_items/', views.getItems, name='getItemstotal'),
 
     path('add_item/', views.addItem, name='addItem'),
     path('update_item/', views.updateItem, name='update_item'),

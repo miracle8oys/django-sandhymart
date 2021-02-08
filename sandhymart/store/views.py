@@ -11,7 +11,20 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .decorators import unauthenticated_user, allowed_users
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import OrderSerializer
 # Create your views here.
+
+
+@api_view(['GET'])
+def getItems(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(
+            customer=customer, complete=False)
+    serializer = OrderSerializer(order, many=False)
+    return Response(serializer.data)
 
 
 def store(request):
