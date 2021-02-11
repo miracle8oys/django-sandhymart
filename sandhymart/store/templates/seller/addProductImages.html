@@ -1,12 +1,14 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-	
 
+
+<h3>{{ product.name }}</h3>
+	
 	<form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="submit">Add to Catalog</button>
+        <input type="file" name="images" multiple class="form-control-file">
+        <button type="submit" name="submit">Add to Prodct</button>
     </form>
 
 {% endblock content %}

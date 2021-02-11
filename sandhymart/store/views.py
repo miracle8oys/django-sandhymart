@@ -173,6 +173,27 @@ def addProduct(request):
 
 
 @allowed_users(allowed_roles=['admin'])
+def addProductImages(request, id_product):
+    product = Product.objects.get(id=id_product)
+    if request.POST:
+        images = request.FILES.getlist('images')
+
+        for image in images:
+            productImages = ProductImages.objects.create(
+                product=product,
+                images=image,
+            )
+
+        return redirect('productList')
+
+    else:
+        context = {
+            'product': product,
+        }
+        return render(request, 'seller/addProductImages.html', context)
+
+
+@allowed_users(allowed_roles=['admin'])
 def updateProduct(request, id_product):
     product = Product.objects.get(id=id_product)
     if request.POST:
